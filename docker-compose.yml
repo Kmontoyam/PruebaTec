@@ -14,3 +14,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5001:5000"
+db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: postcode_db
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    ports:
+      - "5432:5432"

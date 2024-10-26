@@ -47,7 +47,7 @@ def upload_csv():
     # Limpiar datos: quitar comillas y reemplazar ',' por '.'
     df['lat'] = df['lat'].str.replace("'", "").str.replace(",", ".")
     df['lon'] = df['lon'].str.replace("'", "").str.replace(",", ".")
-    
+
     conn = create_connection()
     try:
         with conn.cursor() as cur:
@@ -68,6 +68,7 @@ def upload_csv():
                 try:
                     # Llamar al servicio externo para obtener el código postal
                     response = requests.post('http://microservice2:5000/get_postcode', json={'latitude': lat, 'longitude': lon})
+                    time.sleep(1)# Espera 1 segundo entre las solicitudes a la API
                     
                     if response.status_code == 200:
                         data = response.json()
